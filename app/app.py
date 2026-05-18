@@ -1,7 +1,7 @@
 import os
 from http.server import SimpleHTTPRequestHandler, HTTPServer
 
-MESSAGE = os.getenv("APP_MESSAGE", "Default message")
+MESSAGE = os.getenv("APP_MESSAGE", "DevOps Day 6 running")
 
 class Handler(SimpleHTTPRequestHandler):
     def do_GET(self):
