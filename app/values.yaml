@@ -1,0 +1,7 @@
+replicaCount: 3
+
+image:
+  repository: devops-app
+  tag: latest
+
+containerPort: 8000

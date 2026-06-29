@@ -1,59 +1,106 @@
 # DevOps Containerized Python App
 
-## What this project does:
+## Project Overview
 
-This is a simple Python web application containerized using Docker.
+This project is a simple Python web application used to learn containerization and Kubernetes fundamentals.
 
-It is executed inside a Docker container and managed using Docker Compose.
+The application runs inside containers and is deployed to a Kubernetes cluster. During the project, concepts such as Deployments, Pods, ConfigMaps, Secrets, scaling, updates, rollbacks, and debugging were explored.
 
-The application behavior can be modified using environment variables without changing the code or rebuilding the app.
+---
 
-___
+## Technologies Used
 
+* Python
+* Docker
+* Kubernetes
+* Minikube
+* kubectl
 
-## Architecture Overview:
+---
 
-- **Docker Image**
-  A Docker image is a blueprint used to create containers.
-  It contains the application code and its runtime environment.
-  It should only change when the application structure or dependencies change.
+## Architecture
 
-- **Docker Container**
-  A container is a running instance of a Docker image.
-  It executes the application in an isolated environment.
+### Application Flow
 
-- **Docker Compose**
-  Docker Compose is a tool used to define and manage multi-container or structured applications.
-  It allows services to be configured using a YAML file and started with a single command.
+User Request
+→ Kubernetes Cluster
+→ Pod
+→ Python Application
+→ Response Returned
 
-- **Environment Variables**
-  Environment variables are external configuration values passed to the application at runtime.
-  They allow changing application behavior without modifying code or rebuilding image.
+The Python application listens on port 8000 and serves HTTP responses.
 
-___
+### Kubernetes Components
 
+**Deployment**
 
-## How to run the project
+* Maintains the desired application state.
+* Configured to run 3 pod replicas.
 
-docker compose up -d --build
+**Pods**
 
-Then access:
+* Execute the application containers.
+* Automatically recreated if they fail.
 
-curl http:// localhost:8080
+**ConfigMap**
 
-___
+* Stores non-sensitive configuration values.
+* Allows configuration changes without modifying application code.
 
-## What I learned
+**Secret**
 
-- Difference between image and container
-- Container lifecycle and execution
-- How Docker networking works (port mapping)
-- How configuration is separated from code using environment variables
-- How Docker Compose manages application structure
-- How to debug containers using logs and execution context
+* Stores sensitive values separately from application configuration.
 
-___
+---
 
-## Notes
+## Running the Project
 
-This project is intentionally simple and used for learning DevOps fundamentals such as containerization, orchestration, and configuration management.
+Start the Kubernetes cluster:
+
+```bash
+minikube start
+```
+
+Apply the Kubernetes resources:
+
+```bash
+kubectl apply -f deployment.yaml
+kubectl apply -f configmap.yaml
+kubectl apply -f secret.yaml
+```
+
+Verify the deployment:
+
+```bash
+kubectl get pods
+kubectl get deployments
+kubectl get endpoints
+```
+
+---
+
+## Troubleshooting Commands
+
+```bash
+kubectl get all
+kubectl describe pod <pod-name>
+kubectl logs <pod-name>
+kubectl get endpoints
+```
+
+These commands were used throughout the project to investigate deployment, networking, and application issues.
+
+---
+
+## What I Learned
+
+* Container lifecycle management
+* Docker image creation
+* Container networking concepts
+* Kubernetes Deployments and Pods
+* Scaling workloads
+* Rolling updates and rollbacks
+* Configuration management using ConfigMaps
+* Secret management
+* Kubernetes troubleshooting and debugging techniques
+
