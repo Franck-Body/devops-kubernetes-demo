@@ -4,5 +4,5 @@ metadata:
   name: app-config
 
 data:
-  APP_MODE: production
-  LOG_LEVEL: info
+  APP_MODE: "dev"
+  LOG_LEVEL: "info"
