@@ -7,6 +7,7 @@ app_mode = os.getenv("APP_MODE", "dev")
 log_level = os.getenv("LOG_LEVEL")
 database_password = os.getenv("DATABASE_PASSWORD")
 
+
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         self.send_response(200)
@@ -27,11 +28,14 @@ class Handler(BaseHTTPRequestHandler):
 
         self.wfile.write(response.encode())
 
+
 server = HTTPServer(("0.0.0.0", 8000), Handler)
+
 
 def shutdown_handler(signal_received, frame):
     print("Shutdown signal received")
     sys.exit(0)
+
 
 signal.signal(signal.SIGTERM, shutdown_handler)
 
