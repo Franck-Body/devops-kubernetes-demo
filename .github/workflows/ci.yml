@@ -29,6 +29,12 @@ jobs:
       - name: Start Docker container
         run: docker run -d -p 8000:8000 --name devops-test devops-app
 
+      - name: Check container status
+        run: docker ps -a
+
+      - name: Check container logs
+        run: docker logs devops-test
+
       - name: Test application response
         run: |
           curl --retry 5 --retry-delay 1 localhost:8000 | grep "Hello DevOps"
