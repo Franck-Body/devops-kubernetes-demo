@@ -33,11 +33,13 @@ jobs:
         run: docker ps -a
 
       - name: Check container logs
-        run: docker logs devops-test
+        run: |
+          sleep 2
+          docker logs devops-test
 
       - name: Test application response
         run: |
-          curl --retry 5 --retry-delay 1 localhost:8000 | grep "Hello DevOps"
+          curl --retry 5 --retry-all-errors --retry-delay 1 localhost:8000 | grep "Hello DevOps"
 
       - name: Stop Docker container
         if: always()
